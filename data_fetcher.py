@@ -8,6 +8,19 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 def get_stock_news(ticker_symbol):
     print(f"[{ticker_symbol}] 기업 재무 데이터와 뉴스 긁어오는 중...\n")
     stock = yf.Ticker(ticker_symbol)
+
+# 👇👇👇 [NEW] 파이썬 봇이 아닌 '일반 크롬 브라우저'로 완벽 위장! 👇👇👇
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    })
+    
+    # 💡 위장한 세션(session)을 yf.Ticker에 주입해서 뚫고 들어감!
+    stock = yf.Ticker(ticker_symbol, session=session)
+    # 👆👆👆 여기까지 👆👆👆
+
+
+
     
     # 💡 1. 실전에 필요한 핵심 재무 지표(숫자) 긁어오기
     info = stock.info
@@ -47,4 +60,5 @@ if __name__ == "__main__":
     test_ticker = "005930.KS"
     result = get_stock_news(test_ticker)
     print("=== 📊 수집된 실전 투자 데이터 ===")
+
     print(result)
