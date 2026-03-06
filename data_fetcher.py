@@ -1,5 +1,6 @@
 import yfinance as yf
 import os
+import requests  # 💡 [NEW] 웹 통신을 위해 추가!
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -62,3 +63,4 @@ if __name__ == "__main__":
     print("=== 📊 수집된 실전 투자 데이터 ===")
 
     print(result)
+
