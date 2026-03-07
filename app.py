@@ -126,7 +126,7 @@ with col1:
     # 1. 카카오페이 익명 송금 버튼 (카카오 옐로우)
     # 👉 주의: href 안의 링크를 방금 카카오톡에서 복사한 '송금 링크'로 반드시 변경해!
     st.markdown("""
-    <a href="https://u2x6hofm6exebnxb8ex4ho.streamlit.app/" target="_blank" style="text-decoration: none;">
+    <a href="https://qr.kakaopay.com/FEiSHHmu0" target="_blank" style="text-decoration: none;">
         <div style="background-color: #FEE500; color: #000000; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             💬 카카오페이로 AI 커피 한 잔 사주기
         </div>
@@ -153,6 +153,7 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
