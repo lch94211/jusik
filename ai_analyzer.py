@@ -35,7 +35,6 @@ def analyze_stock_news(ticker):
         
     model = genai.GenerativeModel(MODEL_NAME)
     
-    # 💡 '추천' 단어 삭제 및 법적 책임 회피용 프롬프트로 수정!
     prompt = f"""
     너는 주식 초보자들에게 어려운 금융 개념을 친절하게 설명해 주는 AI 어시스턴트야.
     아래 제공된 '{ticker}' 종목의 [재무 데이터]와 [최신 뉴스]를 분석해 줘. 
@@ -48,6 +47,7 @@ def analyze_stock_news(ticker):
     
     {{
         "financial_analysis": "PER, PBR, 목표가 등을 바탕으로 이 주식의 현재 가치 상태를 초보자 눈높이에서 쉽게 설명 (4~5문장, 단정적인 표현 금지)",
+        "competitor_analysis": "이 기업의 가장 강력한 경쟁사(라이벌) 1~2곳을 언급하고, 현재 이 기업이 경쟁사 대비 가진 장점이나 단점을 주린이 눈높이에서 비교 설명 (3~4문장)",
         "news_sentiment": "최신 뉴스들에 나타난 주요 호재/악재를 객관적으로 요약 설명 (3~4문장)",
         "alternatives": "현재 상황을 고려할 때, 포트폴리오 다각화 차원에서 함께 공부해보면 좋을 대안 섹터나 리스크 헷지 방법",
         "recommendations": [
