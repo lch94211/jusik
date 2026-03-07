@@ -24,11 +24,26 @@ def get_cached_analysis(ticker):
 
 st.markdown("""
     <style>
-    div[data-baseweb="input"] { height: 100px !important; }
+    /* 📱 모바일 기본 세팅: 화면이 작을 땐 날씬하게! */
+    div[data-baseweb="input"] { height: 70px !important; }
     div[data-baseweb="input"] input {
-        font-size: 2.5rem !important; text-align: center !important;
-        height: 100px !important; line-height: 100px !important; font-weight: 900 !important;
+        font-size: 1.2rem !important; 
+        text-align: center !important;
+        height: 70px !important; 
+        line-height: 70px !important; 
+        font-weight: 900 !important;
     }
+    
+    /* 💻 PC 화면 세팅 (가로 768px 이상): 화면이 넓으면 다시 크고 시원하게! */
+    @media (min-width: 768px) {
+        div[data-baseweb="input"] { height: 100px !important; }
+        div[data-baseweb="input"] input {
+            font-size: 2.2rem !important;
+            height: 100px !important; 
+            line-height: 100px !important;
+        }
+    }
+    
     .disclaimer { font-size: 0.8rem; color: #888; text-align: center; margin-top: 50px; }
     </style>
 """, unsafe_allow_html=True)
@@ -114,12 +129,14 @@ if user_input:
 
 # 로직 종료 후 남은 횟수 업데이트
 counter_placeholder.caption(f"🔒 봇 방지 모드 작동 중: 현재 남은 분석 횟수 ({MAX_SEARCHES - st.session_state.search_count} / {MAX_SEARCHES})")
+
 st.divider()
-# 👇👇👇 [NEW] 깔끔한 단일 후원 버튼 섹션 👇👇👇
+
+# 수익 창출 (Monetization) 섹션
 st.subheader("☕ AI 퀀트 분석기가 도움이 되셨나요?")
 st.write("여러분의 작은 후원과 관심이 AI 서버를 끄지 않고 유지하는 데 큰 힘이 됩니다! 🙌")
 
-# 화면 가운데에 예쁘게 위치하도록 max-width와 margin 속성을 추가했어!
+# 👇👇👇여기에_본인_카카오페이_링크_입력 글씨 지우고 진짜 링크 넣기!👇👇👇
 st.markdown("""
 <div style="display: flex; justify-content: center; margin-top: 20px;">
     <a href="https://qr.kakaopay.com/FEiSHHmu0" target="_blank" style="text-decoration: none; width: 100%; max-width: 400px;">
@@ -130,10 +147,8 @@ st.markdown("""
 </div>
 <br>
 """, unsafe_allow_html=True)
-# 👆👆👆 여기까지 👆👆👆
 
-st.markdown("<br>", unsafe_allow_html=True) # 면책 조항과의 간격을 위한 여백
-# 👆👆👆 여기까지 👆👆👆
+# 강력한 법적 면책 조항
 st.markdown("""
 <div class="disclaimer">
     <b>[법적 고지 및 면책 조항]</b><br>
@@ -142,9 +157,3 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
-
-
-
-
-
-
