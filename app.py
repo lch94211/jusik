@@ -127,7 +127,7 @@ with col1:
     # 1. 토스(Toss) 익명 송금 버튼 (파란색)
     # 👉 주의: href 안의 링크를 본인의 실제 토스 아이디 링크(https://toss.me/아이디)로 반드시 변경해!
     st.markdown("""
-    <a href="https://toss.me/여기에_본인_토스아이디_입력" target="_blank" style="text-decoration: none;">
+    <a href="https://u2x6hofm6exebnxb8ex4ho.streamlit.app/" target="_blank" style="text-decoration: none;">
         <div style="background-color: #3182f6; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             💸 토스로 1초 만에 AI 밥값 후원하기
         </div>
@@ -155,4 +155,5 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
+
 
