@@ -114,7 +114,39 @@ if user_input:
 
 # 로직 종료 후 남은 횟수 업데이트
 counter_placeholder.caption(f"🔒 봇 방지 모드 작동 중: 현재 남은 분석 횟수 ({MAX_SEARCHES - st.session_state.search_count} / {MAX_SEARCHES})")
+st.divider()
 
+# 👇👇👇 [NEW] 수익 창출 (Monetization) 섹션 추가! 👇👇👇
+st.subheader("☕ AI 퀀트 분석기가 도움이 되셨나요?")
+st.write("여러분의 작은 후원과 관심이 AI 서버를 끄지 않고 유지하는 데 큰 힘이 됩니다! 🙌")
+
+# 버튼 2개를 나란히 배치하기 위해 컬럼 나누기
+col1, col2 = st.columns(2)
+
+with col1:
+    # 1. 토스(Toss) 익명 송금 버튼 (파란색)
+    # 👉 주의: href 안의 링크를 본인의 실제 토스 아이디 링크(https://toss.me/아이디)로 반드시 변경해!
+    st.markdown("""
+    <a href="https://toss.me/여기에_본인_토스아이디_입력" target="_blank" style="text-decoration: none;">
+        <div style="background-color: #3182f6; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            💸 토스로 1초 만에 AI 밥값 후원하기
+        </div>
+    </a>
+    """, unsafe_allow_html=True)
+
+with col2:
+    # 2. 증권사 제휴(어필리에이트) 링크 버튼 (빨간색)
+    # 👉 주의: href 안의 링크를 본인이 가입한 증권사의 '친구 추천 링크'로 변경해!
+    st.markdown("""
+    <a href="https://여기에_증권사_추천인_링크_입력" target="_blank" style="text-decoration: none;">
+        <div style="background-color: #ff3366; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            📈 수수료 혜택받고 증권사 계좌 개설하기
+        </div>
+    </a>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True) # 면책 조항과의 간격을 위한 여백
+# 👆👆👆 여기까지 👆👆👆
 st.markdown("""
 <div class="disclaimer">
     <b>[법적 고지 및 면책 조항]</b><br>
@@ -123,3 +155,4 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
+
