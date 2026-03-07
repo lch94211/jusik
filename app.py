@@ -120,7 +120,7 @@ st.divider()
 st.subheader("☕ AI 퀀트 분석기가 도움이 되셨나요?")
 st.write("여러분의 작은 후원과 관심이 AI 서버를 끄지 않고 유지하는 데 큰 힘이 됩니다! 🙌")
 
-col1, col2 = st.columns(2)
+col1 = st.columns(1)
 
 with col1:
     # 1. 카카오페이 익명 송금 버튼 (카카오 옐로우)
@@ -133,15 +133,7 @@ with col1:
     </a>
     """, unsafe_allow_html=True)
 
-with col2:
-    # 2. 증권사 제휴(어필리에이트) 링크 버튼 (빨간색)
-    st.markdown("""
-    <a href="https://여기에_증권사_추천인_링크_입력" target="_blank" style="text-decoration: none;">
-        <div style="background-color: #ff3366; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            📈 수수료 혜택받고 증권사 계좌 개설하기
-        </div>
-    </a>
-    """, unsafe_allow_html=True)
+
 
 st.markdown("<br>", unsafe_allow_html=True) # 면책 조항과의 간격을 위한 여백
 # 👆👆👆 여기까지 👆👆👆
@@ -153,6 +145,7 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
