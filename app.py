@@ -6,6 +6,9 @@ from ai_analyzer import analyze_stock_news, get_ticker_from_name
 
 st.set_page_config(page_title="실전 주식 AI 퀀트 대시보드", page_icon="📊", layout="wide")
 
+
+
+
 # 👇 [NEW] 이 부분 추가! 하루(24시간) 단위로 결과 캐싱(저장)
 @st.cache_data(ttl="1d")
 def get_cached_ticker(name):
@@ -40,6 +43,13 @@ if user_input:
         
     with st.spinner(f"[{ticker}] 기업 펀더멘털과 최신 뉴스를 융합 분석 중입니다... 🧠"):
         try:
+            # 👇👇👇 여기도 위장 세션 주입! 👇👇👇
+        session = requests.Session()
+        session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"})
+        
+        stock = yf.Ticker(ticker, session=session) # session 추가
+        hist = stock.history(period="1mo")
+        # 👆👆👆 여기까지 👆👆👆
             stock = yf.Ticker(ticker)
             hist = stock.history(period="1mo")
             if not hist.empty:
@@ -77,3 +87,4 @@ if user_input:
             st.error("AI가 분석 결과를 올바른 형식으로 주지 않았어. 다시 시도해 줘!")
 
             st.write("원본 데이터 확인:", result_text)
+
