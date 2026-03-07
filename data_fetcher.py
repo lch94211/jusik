@@ -7,7 +7,7 @@ load_dotenv()
 def get_stock_news(ticker_symbol):
     print(f"[{ticker_symbol}] 기업 재무 데이터와 뉴스 긁어오는 중...\n")
     
-    # 💡 yfinance 최신 버전이 알아서 처리하게 둠 (session 완전 삭제)
+    # yfinance 최신 버전이 알아서 봇 차단을 우회하므로 기본 호출만 유지
     stock = yf.Ticker(ticker_symbol)
     
     # 1. 재무 데이터 가져오기
