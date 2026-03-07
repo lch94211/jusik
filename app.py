@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import yfinance as yf
+import requests # 👈 여기도 import requests 추가!
 from ai_analyzer import analyze_stock_news, get_ticker_from_name
 
 st.set_page_config(page_title="실전 주식 AI 퀀트 대시보드", page_icon="📊", layout="wide")
@@ -74,4 +75,5 @@ if user_input:
                         
         except json.JSONDecodeError:
             st.error("AI가 분석 결과를 올바른 형식으로 주지 않았어. 다시 시도해 줘!")
+
             st.write("원본 데이터 확인:", result_text)
