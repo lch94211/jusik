@@ -29,15 +29,14 @@ st.markdown("""
         font-size: 2.5rem !important; text-align: center !important;
         height: 100px !important; line-height: 100px !important; font-weight: 900 !important;
     }
-    /* 면책조항 폰트 작고 흐리게 */
     .disclaimer { font-size: 0.8rem; color: #888; text-align: center; margin-top: 50px; }
     </style>
 """, unsafe_allow_html=True)
 
-st.title("📊 나만의 실전 AI 퀀트 분석 대시보드 v2.0")
+st.title("📊 나만의 실전 AI 퀀트 분석 대시보드 v3.0")
 st.markdown("<p style='font-size: 1.3rem; color: #666;'>기업명(한글/영문)을 편하게 입력하고 <b>엔터(Enter)</b>를 누르세요!</p>", unsafe_allow_html=True)
 
-# 💡 버그 픽스: st.empty()로 자리만 먼저 만들어두고, 숫자는 맨 나중에 채워넣음!
+# 잔여 횟수 표시용 예약석 (버그 해결)
 counter_placeholder = st.empty()
 st.divider()
 
@@ -52,7 +51,6 @@ if user_input:
     elif time_passed < COOLDOWN:
         st.warning(f"⏳ AI가 데이터를 수집 중입니다. {int(COOLDOWN - time_passed)}초 후에 다시 시도해 주세요.")
     else:
-        # 💡 정식으로 검색이 시작될 때 카운트를 차감!
         st.session_state.search_count += 1
         st.session_state.last_search_time = current_time
         
@@ -63,10 +61,24 @@ if user_input:
         with st.spinner(f"[{ticker}] 기업 펀더멘털과 최신 뉴스를 융합 분석 중입니다... 🧠"):
             try:
                 stock = yf.Ticker(ticker)
-                hist = stock.history(period="1mo")
+                
+                # 배당률 및 52주 변동폭 상단 표시
+                info = stock.info
+                div_yield = info.get('dividendYield', 0)
+                div_yield_str = f"{round(div_yield * 100, 2)}%" if div_yield else "배당 없음"
+                high_52 = info.get('fiftyTwoWeekHigh', 'N/A')
+                low_52 = info.get('fiftyTwoWeekLow', 'N/A')
+                
+                st.markdown(f"**🏷️ 52주 변동폭:** {low_52} ~ {high_52} | **💰 예상 배당수익률:** {div_yield_str}")
+                
+                # 3개월 주가 및 20일 이동평균선(MA20) 차트
+                hist = stock.history(period="3mo")
                 if not hist.empty:
-                    st.subheader(f"📈 {ticker} 최근 1개월 주가 흐름")
-                    st.line_chart(hist['Close']) 
+                    hist['MA20 (20일선)'] = hist['Close'].rolling(window=20).mean()
+                    hist = hist.rename(columns={'Close': '종가'})
+                    
+                    st.subheader(f"📈 {ticker} 최근 3개월 주가 및 추세선")
+                    st.line_chart(hist[['종가', 'MA20 (20일선)']]) 
             except Exception as e:
                 st.error(f"차트 로딩 에러: {e}")
 
@@ -78,13 +90,15 @@ if user_input:
                 st.subheader("💼 AI 주식 일타강사의 기업 가치 분석")
                 st.success(data.get("financial_analysis", "재무 분석 정보가 없습니다."))
                 
+                st.subheader("⚔️ 라이벌 기업과의 경쟁력 비교")
+                st.info(data.get("competitor_analysis", "경쟁사 분석 정보가 없습니다."))
+                
                 st.subheader("📰 최신 뉴스 모멘텀 (호재/악재)")
-                st.info(data.get("news_sentiment", "뉴스 동향 정보가 없습니다."))
+                st.write(data.get("news_sentiment", "뉴스 동향 정보가 없습니다."))
                 
                 st.subheader("🔄 리스크 관리 및 포트폴리오 대안")
                 st.warning(data.get("alternatives", "대안 정보가 없습니다."))
                 
-                # 💡 법적 리스크 차단: '추천 종목' -> 'AI 관심 편입 종목'으로 변경
                 st.subheader("💡 AI 연관 관심 종목 (단순 참고용)")
                 cols = st.columns(3)
                 recs = data.get("recommendations", [])
@@ -98,10 +112,9 @@ if user_input:
             except json.JSONDecodeError:
                 st.error("AI가 분석 결과를 올바른 형식으로 주지 않았어. 다시 시도해 줘!")
 
-# 💡 버그 픽스: 모든 로직이 끝난 후, 최종 계산된 남은 횟수를 아까 만들어둔 예약석에 덮어씀!
+# 로직 종료 후 남은 횟수 업데이트
 counter_placeholder.caption(f"🔒 봇 방지 모드 작동 중: 현재 남은 분석 횟수 ({MAX_SEARCHES - st.session_state.search_count} / {MAX_SEARCHES})")
 
-# 💡 강력한 법적 면책 조항 (화면 맨 아래 고정)
 st.markdown("""
 <div class="disclaimer">
     <b>[법적 고지 및 면책 조항]</b><br>
