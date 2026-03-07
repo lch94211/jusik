@@ -12,8 +12,8 @@ if 'search_count' not in st.session_state:
 if 'last_search_time' not in st.session_state:
     st.session_state.last_search_time = 0.0
 
-MAX_SEARCHES = 20  # 한 사람당 최대 허용 검색 횟수
-COOLDOWN = 10      # 한 번 검색 후 기다려야 하는 쿨타임 (초)
+MAX_SEARCHES = 20  
+COOLDOWN = 10      
 
 @st.cache_data(ttl="1d")
 def get_cached_ticker(name):
@@ -23,7 +23,6 @@ def get_cached_ticker(name):
 def get_cached_analysis(ticker):
     return analyze_stock_news(ticker)
 
-# UI 디자인 마법
 st.markdown("""
     <style>
     div[data-baseweb="input"] { height: 100px !important; }
@@ -48,10 +47,8 @@ if user_input:
     
     if st.session_state.search_count >= MAX_SEARCHES:
         st.error("🚫 도배 방지: 현재 접속 창에서는 더 이상 검색할 수 없습니다. 새로고침 후 이용해 주세요!")
-        
     elif time_passed < COOLDOWN:
         st.warning(f"⏳ AI가 생각할 시간이 필요해요! {int(COOLDOWN - time_passed)}초 후에 다시 시도해 주세요.")
-        
     else:
         st.session_state.search_count += 1
         st.session_state.last_search_time = current_time
@@ -62,7 +59,7 @@ if user_input:
             
         with st.spinner(f"[{ticker}] 기업 펀더멘털과 최신 뉴스를 융합 분석 중입니다... 🧠"):
             try:
-                # yfinance에 직접 session을 주입하지 않음 (최신 버전이 자체 처리함)
+                # 💡 차트 그리는 곳에서도 session 완전 삭제!
                 stock = yf.Ticker(ticker)
                 hist = stock.history(period="1mo")
                 if not hist.empty:
@@ -88,7 +85,6 @@ if user_input:
                 st.subheader("💡 AI 추천 종목 Top 3")
                 cols = st.columns(3)
                 recs = data.get("recommendations", [])
-                
                 for i, col in enumerate(cols):
                     if i < len(recs):
                         with col:
