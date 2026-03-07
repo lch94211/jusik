@@ -115,25 +115,22 @@ if user_input:
 # 로직 종료 후 남은 횟수 업데이트
 counter_placeholder.caption(f"🔒 봇 방지 모드 작동 중: 현재 남은 분석 횟수 ({MAX_SEARCHES - st.session_state.search_count} / {MAX_SEARCHES})")
 st.divider()
-
-# 👇👇👇 [NEW] 수익 창출 (Monetization) 섹션 👇👇👇
+# 👇👇👇 [NEW] 깔끔한 단일 후원 버튼 섹션 👇👇👇
 st.subheader("☕ AI 퀀트 분석기가 도움이 되셨나요?")
 st.write("여러분의 작은 후원과 관심이 AI 서버를 끄지 않고 유지하는 데 큰 힘이 됩니다! 🙌")
 
-col1 = st.columns(1)
-
-with col1:
-    # 1. 카카오페이 익명 송금 버튼 (카카오 옐로우)
-    # 👉 주의: href 안의 링크를 방금 카카오톡에서 복사한 '송금 링크'로 반드시 변경해!
-    st.markdown("""
-    <a href="https://qr.kakaopay.com/FEiSHHmu0" target="_blank" style="text-decoration: none;">
-        <div style="background-color: #FEE500; color: #000000; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+# 화면 가운데에 예쁘게 위치하도록 max-width와 margin 속성을 추가했어!
+st.markdown("""
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <a href="https://qr.kakaopay.com/FEiSHHmu0" target="_blank" style="text-decoration: none; width: 100%; max-width: 400px;">
+        <div style="background-color: #FEE500; color: #000000; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
             💬 카카오페이로 AI 커피 한 잔 사주기
         </div>
     </a>
-    """, unsafe_allow_html=True)
-
-
+</div>
+<br>
+""", unsafe_allow_html=True)
+# 👆👆👆 여기까지 👆👆👆
 
 st.markdown("<br>", unsafe_allow_html=True) # 면책 조항과의 간격을 위한 여백
 # 👆👆👆 여기까지 👆👆👆
@@ -145,6 +142,7 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
