@@ -116,27 +116,25 @@ if user_input:
 counter_placeholder.caption(f"🔒 봇 방지 모드 작동 중: 현재 남은 분석 횟수 ({MAX_SEARCHES - st.session_state.search_count} / {MAX_SEARCHES})")
 st.divider()
 
-# 👇👇👇 [NEW] 수익 창출 (Monetization) 섹션 추가! 👇👇👇
+# 👇👇👇 [NEW] 수익 창출 (Monetization) 섹션 👇👇👇
 st.subheader("☕ AI 퀀트 분석기가 도움이 되셨나요?")
 st.write("여러분의 작은 후원과 관심이 AI 서버를 끄지 않고 유지하는 데 큰 힘이 됩니다! 🙌")
 
-# 버튼 2개를 나란히 배치하기 위해 컬럼 나누기
 col1, col2 = st.columns(2)
 
 with col1:
-    # 1. 토스(Toss) 익명 송금 버튼 (파란색)
-    # 👉 주의: href 안의 링크를 본인의 실제 토스 아이디 링크(https://toss.me/아이디)로 반드시 변경해!
+    # 1. 카카오페이 익명 송금 버튼 (카카오 옐로우)
+    # 👉 주의: href 안의 링크를 방금 카카오톡에서 복사한 '송금 링크'로 반드시 변경해!
     st.markdown("""
     <a href="https://u2x6hofm6exebnxb8ex4ho.streamlit.app/" target="_blank" style="text-decoration: none;">
-        <div style="background-color: #3182f6; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            💸 토스로 1초 만에 AI 밥값 후원하기
+        <div style="background-color: #FEE500; color: #000000; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            💬 카카오페이로 AI 커피 한 잔 사주기
         </div>
     </a>
     """, unsafe_allow_html=True)
 
 with col2:
     # 2. 증권사 제휴(어필리에이트) 링크 버튼 (빨간색)
-    # 👉 주의: href 안의 링크를 본인이 가입한 증권사의 '친구 추천 링크'로 변경해!
     st.markdown("""
     <a href="https://여기에_증권사_추천인_링크_입력" target="_blank" style="text-decoration: none;">
         <div style="background-color: #ff3366; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -155,5 +153,6 @@ st.markdown("""
     <b>최종 투자 결정과 그에 따른 모든 책임은 전적으로 투자자 본인에게 있습니다.</b>
 </div>
 """, unsafe_allow_html=True)
+
 
 
